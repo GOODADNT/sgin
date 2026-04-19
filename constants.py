@@ -10,7 +10,7 @@ DEFAULT_USER_AGENT: Final[str] = (
 )
 
 SIGN_STATUS_SIGNED: Final[str] = "已签到"
-SIGN_SUCCESS_CODE: Final[int] = 0
+SIGN_SUCCESS_CODE: Final[str] = "0"
 
 BBS_BASE_URL_ENCODED: Final[str] = "aHR0cHM6Ly9iYnMua2FueHVlLmNvbQ=="
 BBS_USER_CENTER_URL_ENCODED: Final[str] = "aHR0cHM6Ly9wYXNzcG9ydC5rYW54dWUuY29tL3VzZXItY2VudGVyLmh0bQ=="
