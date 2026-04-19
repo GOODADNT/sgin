@@ -1,0 +1,53 @@
+name: 论坛自动签到
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sign-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      UV_NO_PROGRESS: "1"
+      UV_LINK_MODE: copy
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version-file: "pyproject.toml"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.11.7"
+          enable-cache: true
+          cache-dependency-glob: |
+            **/pyproject.toml
+            **/uv.lock
+          prune-cache: true
+
+      - name: Show tool versions
+        run: |
+          uv --version
+          uv python --version
+
+      - name: Install dependencies
+        run: uv sync --locked --all-extras
+
+      - name: Run sign-in script
+        env:
+          COOKIE: ${{ secrets.COOKIE }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: uv run main.py
