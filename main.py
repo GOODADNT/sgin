@@ -71,7 +71,6 @@ def main() -> None:
                 return
 
             sign_msg = api_client.do_sign()
-            logger.info("签到成功")
             push_client.send(title=PUSHPLUS_TITLE, message=f"用户{api_client.uid} {sign_msg}")
 
     except api.RegexMatchException as e:

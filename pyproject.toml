@@ -1,9 +1,9 @@
 [project]
-name = "kanxue"
+name = "bbs_sgin"
 version = "0.1.0"
-description = "Add your description here"
+description = ""
 requires-python = ">=3.13"
 dependencies = [
-    "pydantic-settings>=2.13.1",
+    "pydantic-settings>=2.14.0",
     "requests>=2.33.1",
 ]
